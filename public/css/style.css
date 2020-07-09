@@ -1,0 +1,11 @@
+.card-content{
+  object-fit:contain;
+  justify-content: center;
+}
+.card-image img{
+  max-height: 200px;
+  object-fit:contain;
+}
+.nav-wrapper > .brand-logo{
+  font-size:1.5rem;
+}
