@@ -11,13 +11,12 @@ var urlToCache =[
     {url:'/main.js',revision:'1'},
     {url:'/js/teams.js',revision:'1'},
     {url:'/js/savedteam.js',revision:'1'},
-    {url:'/js/api.ts',revision:'1'},
+    {url:'/js/api.js',revision:'1'},
     {url:'/js/idb.js',revision:'1'},
     {url:'/sw.js',revision:'1'},
     {url:'/css/style.css',revision:'1'},
     {url:'/css/materialize.min.css',revision:'1'},
     {url:'/js/materialize.min.js',revision:'1'},
-    {url:'/js/materialize.js',revision:'1'},
     {url:'/js/script.js',revision:'1'},
     {url:'/icons/icon-96x96.png',revision:'1'},
     {url:'/icons/icon-72x72.png',revision:'1'},
@@ -29,6 +28,12 @@ var urlToCache =[
     {url:'/icons/icon-512x512.png',revision:'1'},
     {url:'/manifest.json',revision:'1'}
 ]
+
+workbox.precaching.precacheAndRoute(
+    urlToCache
+,{
+    ignoreUrlParametersMatching: [/.*/]
+})
 
 if(workbox){
     console.log('Workbox berhasil dimuat');

@@ -1,27 +1,27 @@
-var teamData
-var loadTeams =()=>{
+let teamData;
+const loadTeams =()=>{
     loadingIndicator()
-    var teams = getTeams()
+    const teams = getTeams();
     if('caches' in window){
       caches.match(`${url}teams`).then((response)=>{
         response.json().then(data=>{
-          teamData = data
-          teamDataResponse(data)
+          teamData = data;
+          teamDataResponse(data);
         })
       })
     }
     teams.then(data =>{
-      teamData = data
-      teamDataResponse(data)
+      teamData = data;
+      teamDataResponse(data);
   })
 }
-var clickedTeam =(teamId) => {
+const clickedTeam =(teamId) => {
   console.log('clicked')
   var team = teamData.teams.filter(e => e.id == teamId)[0]
   saveTeam(team)
 }
 
-var teamDataResponse = (data) => {
+const teamDataResponse = (data) => {
   var teamElement = document.getElementById('body-content')
   
   data.teams.forEach(team => {
@@ -48,6 +48,6 @@ var teamDataResponse = (data) => {
       </div>
     </div>`
   })
-  hideLoadingIndicator()
+  hideLoadingIndicator();
 }
 

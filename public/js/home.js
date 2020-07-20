@@ -1,29 +1,29 @@
 const loadStandings =()=>{
-    loadingIndicator()
+    loadingIndicator();
           const listStandings = getStandings()
           if('caches' in window){
             caches.match(`${url}competitions/2001/standings?standingType=TOTAL`)
             .then(function(respnse){
               respnse.json().then(data=>{
-                teamData =data
-                standingsDataResponse(data)
+                teamData =data;
+                standingsDataResponse(data);
               })
             })
           }
           listStandings.then(data => {
-              standingsDataResponse(data)
+              standingsDataResponse(data);
           })
   }
   
   const standingsDataResponse = (data) =>{
-    const contentElement = document.getElementById('body-content')
+    const contentElement = document.getElementById('body-content');
   
     data.standings.forEach(standing =>{
-      var listDetail = ''
+      let listDetail = '';
       standing.table.forEach(result=>{
           listDetail +=  `<tr>
           <td>${result.position}</td>
-          <td><img class="responsive-img" width="24" height="24" src="${ result.team.crestUrl || 'img/empty_badge.svg'}" alt="notfound"> ${result.team.name}</td>
+          <td><img class="responsive-img" width="24" onError="this.onerror=null;this.src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg';" height="24" src="${ result.team.crestUrl}" alt="notfound"> ${result.team.name}</td>
           <td>${result.playedGames}</td>
           <td>${result.won}</td>
           <td>${result.draw}</td>
@@ -59,5 +59,5 @@ const loadStandings =()=>{
       </div>
       </div>`
   })
-  hideLoadingIndicator()
+  hideLoadingIndicator();
   }

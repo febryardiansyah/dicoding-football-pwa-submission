@@ -1,51 +1,51 @@
-var dbPromised = idb.open('football',1,(upgradeDb)=>{
+let dbPromised = idb.open('football',1,(upgradeDb)=>{
     switch(upgradeDb.oldVersion){
         case 0:
-            upgradeDb.createObjectStore('teams',{keyPath: 'id'})
+            upgradeDb.createObjectStore('teams',{keyPath: 'id'});
     }
   })
 function saveTeam(team){
     dbPromised.then(function(db){
-        var tx = db.transaction('teams','readwrite')
-        var store = tx.objectStore('teams')
-        store.put(team)
-        return tx.complete
+        let tx = db.transaction('teams','readwrite');
+        let store = tx.objectStore('teams');
+        store.put(team);
+        return tx.complete;
     })
     .then(()=>{
-        M.toast({ html: `${team.name} Succasfully Saved!`,classes: 'rounded'})
-        console.log('Team Saved')
+        M.toast({ html: `${team.name} Succasfully Saved!`,classes: 'rounded'});
+        console.log('Team Saved');
     })
 }
 function getSavedTeams() {
     return dbPromised.then(db=>{
-        var tx = db.transaction('teams','readonly')
-        var store = tx.objectStore('teams')
-        return store.getAll()
+        let tx = db.transaction('teams','readonly');
+        let store = tx.objectStore('teams');
+        return store.getAll();
     })
 }
 
 function deleteSavedTeam(teamId){
     dbPromised.then(db=>{
-        var tx = db.transaction('teams','readwrite')
-        var store = tx.objectStore('teams')
-        store.delete(teamId)
-        return tx.complete
+        let tx = db.transaction('teams','readwrite');
+        let store = tx.objectStore('teams');
+        store.delete(teamId);
+        return tx.complete;
     }).then(()=>{
-        M.toast({ html: `Team has deleted from Favorite!`,classes: 'rounded'})
-        loadSavedTeams()
-        console.log('delete completed')
-    }).catch(err => console.log(err))
+        M.toast({ html: `Team has deleted from Favorite!`,classes: 'rounded'});
+        loadSavedTeams();
+        console.log('delete completed');
+    }).catch(err => console.log(err));
 }
 const clickedDelete = (teamId)=>{
-    const dialog = confirm('Are You Sure want to remove?')
+    const dialog = confirm('Are You Sure want to remove?');
     if(dialog == true){
-        deleteSavedTeam(teamId)
+        deleteSavedTeam(teamId);
     }
 }
 const loadSavedTeams = ()=>{
-    loadingIndicator()
-    const teams = getSavedTeams()
-    const teamElements = document.getElementById('body-content')
+    loadingIndicator();
+    const teams = getSavedTeams();
+    const teamElements = document.getElementById('body-content');
     
     teams.then(data=>{
         teamData =data
@@ -74,6 +74,6 @@ const loadSavedTeams = ()=>{
             </div>`
           })
           
-          hideLoadingIndicator()
+          hideLoadingIndicator();
     })
 }

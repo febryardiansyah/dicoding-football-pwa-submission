@@ -11,16 +11,16 @@ function fetchingApi(url){
 }
 function apiStatus(response){
     if(response.status !=200){
-        return Promise.reject(new Error(response.status))
+        return Promise.reject(new Error(response.status));
     }else{
-        return Promise.resolve(response)
+        return Promise.resolve(response);
     }
 }
 function responseJson(response){
-    return response.json()
+    return response.json();
 }
 function errorResponse(response){
-    console.log('error'+response)
+    console.log('error'+response);
 }
 
 const getStandings=()=>{
